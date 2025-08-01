@@ -1,0 +1,24 @@
+{
+  "name": "javascript-unittest-example",
+  "version": "1.0.0",
+  "description": "Ein einfaches Beispielprojekt für Unit-Tests mit Jest",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "keywords": ["javascript", "jest", "unittest", "testing"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/**/*.test.js"
+    ]
+  }
+}
