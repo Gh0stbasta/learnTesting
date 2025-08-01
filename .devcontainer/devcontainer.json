@@ -1,0 +1,33 @@
+{
+    "name": "JavaScript Testing Environment",
+    "image": "mcr.microsoft.com/devcontainers/javascript-node:1-18-bullseye",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "PKief.material-icon-theme",
+                "GitHub.copilot",
+                "GitHub.copilot-chat",
+                "esbenp.prettier-vscode",
+                "rvest.vs-code-prettier-eslint",
+                "dbaeumer.vscode-eslint",
+                "ms-vscode.live-server",
+                "leizongmin.node-module-intellisense",
+                "ms-vscode.extension-test-runner"
+            ],
+            "settings": {
+                "workbench.iconTheme": "material-icon-theme",
+                "editor.formatOnSave": true,
+                "eslint.format.enable": true
+            }
+        }
+    },
+    "postCreateCommand": "npm install",
+    "remoteUser": "node",
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {
+            "installZsh": true,
+            "installOhMyZsh": true,
+            "upgradePackages": true
+        }
+    }
+}
