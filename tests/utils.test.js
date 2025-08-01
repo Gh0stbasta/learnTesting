@@ -1,3 +1,5 @@
+// Destructuring Import - lädt nur benötigte Funktionen aus utils
+// PATTERN: Named Imports für bessere Übersicht und Tree-Shaking
 const {
   reverseString,
   capitalize,
@@ -7,60 +9,79 @@ const {
   asyncOperation
 } = require('../src/utils');
 
+// Haupttestgruppe für Utility-Funktionen
+// KONZEPT: Tests für reine Funktionen (pure functions)
 describe('Utils', () => {
   
+  // Testgruppe für String-Umkehrung
+  // ALGORITHMUS-TEST: split-reverse-join Pattern
   describe('reverseString', () => {
+    // Basis-Funktionalität mit verschiedenen String-Längen
     test('sollte einen String umkehren', () => {
       expect(reverseString('hello')).toBe('olleh');
       expect(reverseString('JavaScript')).toBe('tpircSavaJ');
     });
 
+    // Edge Case: Leerer String
+    // WICHTIG: Funktionen sollten mit minimalen Eingaben umgehen können
     test('sollte mit leeren Strings funktionieren', () => {
       expect(reverseString('')).toBe('');
     });
 
+    // Edge Case: Einzelnes Zeichen (unveränderlich bei Umkehrung)
     test('sollte mit einem einzelnen Zeichen funktionieren', () => {
       expect(reverseString('a')).toBe('a');
     });
 
+    // Validierungs-Tests: Type Safety
     test('sollte einen Fehler bei nicht-String Parametern werfen', () => {
       expect(() => reverseString(123)).toThrow('Parameter muss ein String sein');
       expect(() => reverseString(null)).toThrow('Parameter muss ein String sein');
     });
   });
 
+  // Testgruppe für Kapitalisierung
+  // STRING TRANSFORMATION: Erster Buchstabe groß, Rest klein
   describe('capitalize', () => {
+    // Verschiedene Kapitalisierungs-Szenarien
     test('sollte den ersten Buchstaben großschreiben', () => {
-      expect(capitalize('hello')).toBe('Hello');
-      expect(capitalize('javaScript')).toBe('Javascript');
-      expect(capitalize('WORLD')).toBe('World');
+      expect(capitalize('hello')).toBe('Hello');        // lowercase → Capitalize
+      expect(capitalize('javaScript')).toBe('Javascript'); // camelCase → Capitalize
+      expect(capitalize('WORLD')).toBe('World');         // UPPERCASE → Capitalize
     });
 
+    // Edge Case: Leerer String sollte unverändert bleiben
     test('sollte mit leeren Strings funktionieren', () => {
       expect(capitalize('')).toBe('');
     });
 
+    // Edge Case: Einzelnes Zeichen
     test('sollte mit einem einzelnen Zeichen funktionieren', () => {
-      expect(capitalize('a')).toBe('A');
-      expect(capitalize('A')).toBe('A');
+      expect(capitalize('a')).toBe('A'); // Klein → Groß
+      expect(capitalize('A')).toBe('A'); // Schon groß → unverändert
     });
 
+    // Type Validation
     test('sollte einen Fehler bei nicht-String Parametern werfen', () => {
       expect(() => capitalize(123)).toThrow('Parameter muss ein String sein');
     });
   });
 
+  // Testgruppe für Gerade/Ungerade-Prüfung
+  // MATHEMATISCHER ALGORITHMUS: Modulo-Operation (% 2)
   describe('isEven', () => {
+    // Positive Tests: Was ist gerade?
     test('sollte gerade Zahlen erkennen', () => {
-      expect(isEven(2)).toBe(true);
-      expect(isEven(0)).toBe(true);
-      expect(isEven(-4)).toBe(true);
-      expect(isEven(100)).toBe(true);
+      expect(isEven(2)).toBe(true);     // Standard gerade Zahl
+      expect(isEven(0)).toBe(true);     // Edge Case: 0 ist gerade
+      expect(isEven(-4)).toBe(true);    // Negative gerade Zahl
+      expect(isEven(100)).toBe(true);   // Größere gerade Zahl
     });
 
+    // Negative Tests: Was ist ungerade?
     test('sollte ungerade Zahlen erkennen', () => {
-      expect(isEven(1)).toBe(false);
-      expect(isEven(3)).toBe(false);
+      expect(isEven(1)).toBe(false);    // Kleinste positive ungerade Zahl
+      expect(isEven(3)).toBe(false);    // Standard ungerade Zahl
       expect(isEven(-3)).toBe(false);
       expect(isEven(99)).toBe(false);
     });
